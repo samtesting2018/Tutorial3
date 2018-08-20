@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GettingStartedLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -7,12 +8,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class WFC_testing_Default : System.Web.UI.Page
+public partial class _Default : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         // Step 1 Create a URI to serve as the base address.  
-        Uri baseAddress = new Uri("http://localhost:9954/");
+        Uri baseAddress = new Uri("http://localhost:8000/GettingStarted/");
 
         // Step 2 Create a ServiceHost instance  
         ServiceHost selfHost = new ServiceHost(typeof(CalculatorService), baseAddress);
@@ -29,7 +30,8 @@ public partial class WFC_testing_Default : System.Web.UI.Page
 
             // Step 5 Start the service.  
             selfHost.Open();
-            Response.Write("The service is ready.");
+            Console.WriteLine("The service is ready.");
+            Console.WriteLine("Press <ENTER> to terminate service.");
             Console.WriteLine();
             Console.ReadLine();
 
@@ -41,11 +43,5 @@ public partial class WFC_testing_Default : System.Web.UI.Page
             Console.WriteLine("An exception occurred: {0}", ce.Message);
             selfHost.Abort();
         }
-        //ICalculatorService client = new CalculatorService();
-
-        // Use the 'client' variable to call operations on the service.
-        //label1.Text = Convert.ToString(client.Add(1.0, 1.0));
-        // Always close the client.
-        //client.Close();
     }
 }
